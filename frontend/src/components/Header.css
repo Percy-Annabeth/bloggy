@@ -1,0 +1,76 @@
+/* General navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #444; /* Dark gray background */
+    color: white;
+    padding: 10px 20px; /* Reduced padding for a slimmer header */
+    font-family: 'Poppins', sans-serif; /* Modern font for buttons and text */
+}
+
+/* Styling for the logo */
+.navbar-logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    font-family: 'Dancing Script', cursive; /* Stylish font for the website name */
+    color: #ff6f61; /* Vibrant coral color */
+}
+
+/* Styling for navbar links */
+.navbar-links a,
+.navbar-auth a {
+    margin: 0 10px; /* Reduced margin for a tighter look */
+    color: white;
+    text-decoration: none;
+    font-size: 0.95em; /* Slightly smaller font size for buttons */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover effect for links */
+.navbar-links a:hover,
+.navbar-auth a:hover {
+    color: #ff6f61; /* Coral color on hover */
+}
+
+/* Styling the search bar */
+.navbar-search {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navbar-search input {
+    border: none;
+    border-radius: 20px; /* Rounded edges */
+    padding: 6px 12px; /* Reduced padding for a sleeker look */
+    width: 180px; /* Slightly smaller width */
+    outline: none;
+    font-size: 0.9em;
+    transition: box-shadow 0.3s ease;
+}
+
+.navbar-search input:focus {
+    box-shadow: 0 0 5px #ff6f61; /* Highlight effect when focused */
+}
+
+/* Search icon styling */
+.search-icon {
+    position: absolute;
+    right: 10px;
+    color: #ff6f61; /* Coral color for the icon */
+    cursor: pointer;
+}
+
+/* Auth links for login/signup */
+.navbar-auth a {
+    margin: 0 8px; /* Slightly reduced margin */
+    font-size: 0.95em; /* Smaller font size */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for auth links */
+.navbar-auth a:hover {
+    color: #ff6f61;
+}

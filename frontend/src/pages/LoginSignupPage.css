@@ -1,0 +1,86 @@
+/* General styles for the container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Gradient background */
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    margin: 0;
+  }
+  
+  /* Box styles for the form */
+  .auth-box {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
+  }
+  
+  /* Form headings */
+  .auth-box h2 {
+    margin-bottom: 20px;
+    color: #ff7e5f;
+  }
+  
+  /* Input fields styling */
+  .auth-input {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 25px; /* Rounded edges */
+    font-size: 1em;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .auth-input:focus {
+    border-color: #ff7e5f;
+    box-shadow: 0 0 5px #ff7e5f;
+  }
+  
+  /* Button styles */
+  .auth-button {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #ff7e5f;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .auth-button:hover {
+    background-color: #feb47b;
+  }
+  
+  /* Message styling */
+  .auth-message {
+    margin: 15px 0;
+    color: #333;
+    font-size: 0.9em;
+  }
+  
+  /* Toggle link styling */
+  .auth-toggle {
+    font-size: 0.9em;
+    margin-top: 15px;
+  }
+  
+  .auth-toggle span {
+    color: #ff7e5f;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  
+  .auth-toggle span:hover {
+    color: #feb47b;
+  }
+  

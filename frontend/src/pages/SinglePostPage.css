@@ -1,0 +1,110 @@
+/* Background: A book/diary-like texture */
+body {
+  background: #f3eacb; /* Light paper color */
+  font-family: 'Merriweather', serif;
+}
+
+/* Container */
+.single-post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Post Card */
+.post-card {
+  width: 60%;
+  background: #fffef2;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border: 2px solid #b48b64;
+  transition: transform 0.2s ease-in-out;
+}
+
+.post-card:hover {
+  transform: scale(1.02);
+}
+
+/* Title */
+.post-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4d3319;
+}
+
+/* Author */
+.post-author {
+  font-size: 16px;
+  color: #776655;
+  margin-bottom: 15px;
+}
+
+/* Content */
+.post-content {
+  font-size: 18px;
+  text-align: justify;
+  line-height: 1.6;
+  padding: 15px;
+  background: #fcf8e8;
+  border-radius: 6px;
+}
+
+/* Post Stats */
+.post-stats {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #5a432b;
+}
+
+/* Buttons */
+.post-actions {
+  margin-top: 15px;
+}
+
+.update-btn, .delete-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.update-btn {
+  background: #6eaa5e;
+  color: white;
+}
+
+.delete-btn {
+  background: #e74c3c;
+  color: white;
+}
+
+.update-btn:hover {
+  background: #5a923d;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+/* Comments Section */
+.comments-section {
+  width: 60%;
+  margin-top: 30px;
+  background: #f8f5e4;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.comment {
+  background: #fff;
+  padding: 10px;
+  margin: 8px 0;
+  border-left: 4px solid #b48b64;
+  border-radius: 5px;
+}
