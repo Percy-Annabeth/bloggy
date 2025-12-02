@@ -17,8 +17,11 @@ const app = express();
 // Security Middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:5173",
-  credentials: true
+  origin: [
+  "http://localhost:5173",
+  "https://onrender.com/blablablablablabla"
+  ],
+credentials: true
 }));
 
 // Rate Limiting
@@ -75,6 +78,26 @@ app.get("/", (req, res) => {
     <p><a href="/api/health">Health Check</a></p>
   `);
 });
+
+
+
+
+
+
+
+
+
+
+
+const path = require("path");
+
+// Serve Frontend Production Build
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
+
 
 // 404 Handler
 app.use((req, res) => {
