@@ -1,429 +1,343 @@
-// import React, { useEffect, useState } from "react";
-// import { useParams, useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import API_BASE_URL from "../utils/APIBaseUrl";
-// import "./SinglePostPage.css";
-// import ActionIcon from "../components/ActionIcon";
-
-// const SinglePostPage = ({ user }) => {
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-//   const [post, setPost] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   // Separate state for likes and dislikes count
-//   const [likesCount, setLikesCount] = useState(0);
-//   const [dislikesCount, setDislikesCount] = useState(0);
-//   const [favouritesCount, setFavouritesCount] = useState(0);
-
-//   useEffect(() => {
-//     const fetchPost = async () => {
-//       try {
-//         const response = await axios.get(`${API_BASE_URL}/posts/${id}`);
-//         const postData = response.data.data;
-//         setPost(postData);
-//         setLikesCount(postData.likes.length);
-//         setDislikesCount(postData.dislikes.length);
-//       } catch (err) {
-//         setError("Failed to fetch post");
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-//     fetchPost();
-//   }, [id]);
-//   const handleLikesUpdate = (updatedLikes, userAction) => {
-//     setLikesCount(updatedLikes.length);
-  
-//     if (userAction === "like") {
-//       // If the user previously disliked and now liked, reduce dislikes count
-//       setDislikesCount((prev) => Math.max(prev - 1, 0));
-//     }
-//   };
-  
-//   const handleDislikesUpdate = (updatedDislikes, userAction) => {
-//     setDislikesCount(updatedDislikes.length);
-  
-//     if (userAction === "dislike") {
-//       // If the user previously liked and now disliked, reduce likes count
-//       setLikesCount((prev) => Math.max(prev - 1, 0));
-//     }
-//   };
-  
-//   const handleFavouritesUpdate = (updatedFavourites) => {
-//     setFavouritesCount(updatedFavourites.length);
-//   };
-  
-//   const handleDelete = async () => {
-//     try {
-//       await axios.delete(`${API_BASE_URL}/posts/${id}`, {
-//         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-//       });
-//       navigate("/");
-//     } catch (err) {
-//       console.error("Error deleting post", err);
-//     }
-//   };
-
-//   if (loading) return <p>Loading... please wait...</p>;
-//   if (error) return <p className="error">{error}</p>;
-
-//   return (
-//     <div className="single-post-page">  
-//       <div className="post-container">
-//         <h1 className="post-title">{post.title}</h1>
-//         <p className="post-meta">By {post.user} at {new Date(post.createdAt).toLocaleDateString()}</p>
-//         <div className="post-content">{post.content[0].para}</div>
-
-//         <div className="post-stats">
-//         <p>Views:{post.views}</p>
-
-//           <div className="post-likes">{likesCount} </div>
-//           <div className="post-likes">{dislikesCount} </div>
-//           <div className="post-likes">{favouritesCount} </div>
-
-
-//           <ActionIcon 
-//             actionType="like" 
-//             postId={post._id} 
-//             currentUserId={localStorage.getItem("userId")} 
-//             initialState={post.likes} 
-//             iconStates={{ active: "👍", inactive: "👍" }}
-//             onUpdate={handleLikesUpdate} // Pass handler for likes update
-//           />
-
-//           <ActionIcon 
-//             actionType="dislike" 
-//             postId={post._id} 
-//             currentUserId={localStorage.getItem("userId")} 
-//             initialState={post.dislikes} 
-//             iconStates={{ active: "👎", inactive: "👎🏽" }}
-//             onUpdate={handleDislikesUpdate} // Pass handler for dislikes update
-//           />
-//         </div>
-
-//         <ActionIcon 
-//             actionType="favourite" 
-//             postId={post._id} 
-//             currentUserId={localStorage.getItem("userId")} 
-//             initialState={post.favourited_by} 
-//             iconStates={{ active: "❤️", inactive: "🤍" }}
-//             onUpdate={handleFavouritesUpdate} // Pass handler for likes update
-//           />
-
-//         {user && user._id === post.authorId && (
-//           <div className="post-actions">
-//             <button className="edit-btn" onClick={() => navigate(`/edit/${id}`)}>Edit</button>
-//             <button className="delete-btn" onClick={handleDelete}>Delete</button>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SinglePostPage;
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useEffect, useState } from "react";
-// import { useParams, useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import API_BASE_URL from "../utils/APIBaseUrl";
-// import "./SinglePostPage.css";
-// import ActionIcon from "../components/ActionIcon";
-
-// const SinglePostPage = ({ user }) => {
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-//   const [post, setPost] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   // Separate state for likes and dislikes count
-//   const [likesCount, setLikesCount] = useState(0);
-//   const [dislikesCount, setDislikesCount] = useState(0);
-//   const [favouritesCount, setFavouritesCount] = useState(0);
-
-//   useEffect(() => {
-//     const fetchPost = async () => {
-//       try {
-//         const response = await axios.get(`${API_BASE_URL}/posts/${id}`);
-//         const postData = response.data.data;
-//         setPost(postData);
-//         setLikesCount(postData.likes.length);
-//         setDislikesCount(postData.dislikes.length);
-//       } catch (err) {
-//         setError("Failed to fetch post");
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-//     fetchPost();
-//   }, [id]);
-
-//   const handleLikesUpdate = (updatedLikes, userAction) => {
-//     setLikesCount(updatedLikes.length);
-//     if (userAction === "like") {
-//       setDislikesCount((prev) => Math.max(prev - 1, 0));
-//     }
-//   };
-
-//   const handleDislikesUpdate = (updatedDislikes, userAction) => {
-//     setDislikesCount(updatedDislikes.length);
-//     if (userAction === "dislike") {
-//       setLikesCount((prev) => Math.max(prev - 1, 0));
-//     }
-//   };
-
-//   const handleFavouritesUpdate = (updatedFavourites) => {
-//     setFavouritesCount(updatedFavourites.length);
-//   };
-
-//   const handleDelete = async () => {
-//     try {
-//       await axios.delete(`${API_BASE_URL}/posts/${id}`, {
-//         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-//       });
-//       navigate("/");
-//     } catch (err) {
-//       console.error("Error deleting post", err);
-//     }
-//   };
-
-//   if (loading) return <p>Loading... please wait...</p>;
-//   if (error) return <p className="error">{error}</p>;
-// console.log("post user",post);
-//   return (
-//     <div className="single-post-page">
-//       <div className="post-container">
-//         <h1 className="post-title">{post.title}</h1>
-//         <p className="post-meta">
-//           By user : <span className="author-link" onClick={() => navigate(`/visitorprofile/${post.user._id}`)}>{post.user.name}</span> 
-//           at the time of {new Date(post.createdAt).toLocaleDateString()}
-//         </p>
-//         <div className="post-content">{post.content[0].para}</div>
-
-//         <div className="post-stats">
-//           <p>Views: {post.views}</p>
-//           <div className="post-likes">{likesCount} </div>
-//           <div className="post-likes">{dislikesCount} </div>
-//           <div className="post-likes">{favouritesCount} </div>
-
-//           <ActionIcon 
-//             actionType="like" 
-//             postId={post._id} 
-//             currentUserId={localStorage.getItem("userId")} 
-//             initialState={post.likes} 
-//             iconStates={{ active: "👍", inactive: "👍" }}
-//             onUpdate={handleLikesUpdate} 
-//           />
-
-//           <ActionIcon 
-//             actionType="dislike" 
-//             postId={post._id} 
-//             currentUserId={localStorage.getItem("userId")} 
-//             initialState={post.dislikes} 
-//             iconStates={{ active: "👎", inactive: "👎🏽" }}
-//             onUpdate={handleDislikesUpdate} 
-//           />
-//         </div>
-
-//         <ActionIcon 
-//           actionType="favourite" 
-//           postId={post._id} 
-//           currentUserId={localStorage.getItem("userId")} 
-//           initialState={post.favourited_by} 
-//           iconStates={{ active: "❤️", inactive: "🤍" }}
-//           onUpdate={handleFavouritesUpdate} 
-//         />
-
-//         {user && user._id === post.authorId && (
-//           <div className="post-actions">
-//             <button className="edit-btn" onClick={() => navigate(`/edit/${id}`)}>Edit</button>
-//             <button className="delete-btn" onClick={handleDelete}>Delete</button>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SinglePostPage;
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { 
+  FaHeart, 
+  FaRegHeart, 
+  FaThumbsDown, 
+  FaRegThumbsDown,
+  FaBookmark,
+  FaRegBookmark,
+  FaEye,
+  FaClock,
+  FaEdit,
+  FaTrash,
+  FaShare,
+  FaComment
+} from "react-icons/fa";
 import API_BASE_URL from "../utils/APIBaseUrl";
 import "./SinglePostPage.css";
-import ActionIcon from "../components/ActionIcon";
 
-const SinglePostPage = ({ user }) => {
+const SinglePostPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [actionLoading, setActionLoading] = useState(false);
+  
+  const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+  const token = localStorage.getItem("token");
+  const isOwner = currentUser._id === post?.user?._id;
 
-  const [likesCount, setLikesCount] = useState(0);
-  const [dislikesCount, setDislikesCount] = useState(0);
-  const [favouritesCount, setFavouritesCount] = useState(0);
-
+  // Fetch post
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/posts/${id}`);
-        const postData = response.data.data;
-        setPost(postData);
-        console.log(postData);
-        setLikesCount(postData.likes.length);
-        setDislikesCount(postData.dislikes.length);
+        setPost(response.data.data);
+        setLoading(false);
       } catch (err) {
-        setError("Failed to fetch post");
-      } finally {
+        setError("Failed to load post");
         setLoading(false);
       }
     };
     fetchPost();
   }, [id]);
 
-  const handleLikesUpdate = (updatedLikes, userAction) => {
-    setLikesCount(updatedLikes.length);
-    if (userAction === "like") {
-      setDislikesCount((prev) => Math.max(prev - 1, 0));
+  // Check if user has liked/disliked/favorited
+  const hasLiked = post?.likes?.some(like => like.user === currentUser._id);
+  const hasDisliked = post?.dislikes?.some(dislike => dislike.user === currentUser._id);
+  const hasFavorited = post?.favourited_by?.some(fav => fav.user === currentUser._id);
+
+  // Calculate reading time
+  const calculateReadingTime = () => {
+    if (!post?.content) return "1 min read";
+    const text = post.content
+      .filter(item => item.type === "text")
+      .map(item => item.para || item.content?.para || "")
+      .join(" ");
+    const words = text.split(" ").length;
+    const minutes = Math.ceil(words / 200);
+    return `${minutes} min read`;
+  };
+
+  // Handle like
+  const handleLike = async () => {
+    if (!token) {
+      navigate("/auth");
+      return;
     }
-  };
-
-  const handleDislikesUpdate = (updatedDislikes, userAction) => {
-    setDislikesCount(updatedDislikes.length);
-    if (userAction === "dislike") {
-      setLikesCount((prev) => Math.max(prev - 1, 0));
+    setActionLoading(true);
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/posts/${id}/like`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setPost(response.data.data);
+    } catch (error) {
+      console.error("Error liking post:", error);
     }
+    setActionLoading(false);
   };
 
-  const handleFavouritesUpdate = (updatedFavourites) => {
-    setFavouritesCount(updatedFavourites.length);
+  // Handle dislike
+  const handleDislike = async () => {
+    if (!token) {
+      navigate("/auth");
+      return;
+    }
+    setActionLoading(true);
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/posts/${id}/dislike`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setPost(response.data.data);
+    } catch (error) {
+      console.error("Error disliking post:", error);
+    }
+    setActionLoading(false);
   };
 
+  // Handle favorite
+  const handleFavorite = async () => {
+    if (!token) {
+      navigate("/auth");
+      return;
+    }
+    setActionLoading(true);
+    try {
+      const endpoint = hasFavorited ? "remfavourite" : "addfavourite";
+      const response = await axios.put(
+        `${API_BASE_URL}/posts/${id}/${endpoint}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setPost(response.data.data);
+    } catch (error) {
+      console.error("Error favoriting post:", error);
+    }
+    setActionLoading(false);
+  };
+
+  // Handle delete
   const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+
     try {
       await axios.delete(`${API_BASE_URL}/posts/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        headers: { Authorization: `Bearer ${token}` }
       });
-      navigate("/");
-    } catch (err) {
-      console.error("Error deleting post", err);
+      navigate("/discover");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("Failed to delete post");
     }
   };
 
-  if (loading) return <p>Loading... please wait...</p>;
-  if (error) return <p className="error">{error}</p>;
+  // Handle share
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: post.title,
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert("Link copied to clipboard!");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="single-post-page">
+        <div className="container">
+          <div className="post-skeleton">
+            <div className="skeleton skeleton-title"></div>
+            <div className="skeleton skeleton-meta"></div>
+            <div className="skeleton skeleton-content"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="single-post-page">
+        <div className="container">
+          <div className="error-message">
+            <h2>{error}</h2>
+            <button className="btn btn-primary" onClick={() => navigate("/discover")}>
+              Back to Discover
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="single-post-page">
-      <div className="post-container">
-        <h1 className="post-title">{post.title}</h1>
-        <p className="post-meta">
-          By user:{" "}
-          <span
-            className="author-link"
-            onClick={() => navigate(`/visitorprofile/${post.user._id}`)}
-          >
-            {post.user.name}
-          </span>{" "}
-          at {new Date(post.createdAt).toLocaleDateString()}
-        </p>
+      <article className="post-article">
+        <div className="container post-container">
+          {/* Post Header */}
+          <header className="post-header">
+            <h1 className="post-title">{post.title}</h1>
+            
+            <div className="post-meta">
+              <div className="author-info">
+                {post.user?.profile_pic && (
+                  <img 
+                    src={post.user.profile_pic} 
+                    alt={post.user.name}
+                    className="author-avatar"
+                  />
+                )}
+                <div className="author-details">
+                  <span 
+                    className="author-name"
+                    onClick={() => navigate(`/visitorprofile/${post.user._id}`)}
+                  >
+                    {post.user?.name || "Anonymous"}
+                  </span>
+                  <div className="post-info">
+                    <span className="post-date">
+                      {new Date(post.createdAt).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
+                    </span>
+                    <span className="separator">•</span>
+                    <span className="reading-time">
+                      <FaClock />
+                      {calculateReadingTime()}
+                    </span>
+                    <span className="separator">•</span>
+                    <span className="views">
+                      <FaEye />
+                      {post.views || 0} views
+                    </span>
+                  </div>
+                </div>
+              </div>
 
-        <div className="post-content">
-  {post.content && post.content.length > 0 ? (
-    post.content.map((item, index) => {
-      if (item.type === "text" && item.content?.para) {
-        return <p key={index} className="post-text">{item.content.para}</p>;
-      } else if (item.type === "image" && item.content?.image_url) {
-        return <img key={index} className="post-image" src={item.content.image_url} alt="Post media" />;
-      } else if (item.type === "video" && item.content?.video_url) {
-        return (
-          <video key={index} className="post-video" controls>
-            <source src={item.content.video_url} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        );
-      } else {
-        return null;
-      }
-    })
-  ) : (
-    <p>No content available.</p>
-  )}
-</div>
+              {isOwner && (
+                <div className="owner-actions">
+                  <button 
+                    className="action-btn edit-btn"
+                    onClick={() => navigate(`/edit/${id}`)}
+                  >
+                    <FaEdit /> Edit
+                  </button>
+                  <button 
+                    className="action-btn delete-btn"
+                    onClick={handleDelete}
+                  >
+                    <FaTrash /> Delete
+                  </button>
+                </div>
+              )}
+            </div>
+          </header>
 
-
-        <div className="post-stats">
-          <p>Views: {post.views}</p>
-          <div className="post-likes">{likesCount} </div>
-          <div className="post-likes">{dislikesCount} </div>
-          <div className="post-likes">{favouritesCount} </div>
-
-          <ActionIcon
-            actionType="like"
-            postId={post._id}
-            currentUserId={localStorage.getItem("userId")}
-            initialState={post.likes}
-            iconStates={{ active: "👍", inactive: "👍" }}
-            onUpdate={handleLikesUpdate}
-          />
-
-          <ActionIcon
-            actionType="dislike"
-            postId={post._id}
-            currentUserId={localStorage.getItem("userId")}
-            initialState={post.dislikes}
-            iconStates={{ active: "👎", inactive: "👎🏽" }}
-            onUpdate={handleDislikesUpdate}
-          />
-        </div>
-
-        <ActionIcon
-          actionType="favourite"
-          postId={post._id}
-          currentUserId={localStorage.getItem("userId")}
-          initialState={post.favourited_by}
-          iconStates={{ active: "❤️", inactive: "🤍" }}
-          onUpdate={handleFavouritesUpdate}
-        />
-
-        {user && user._id === post.authorId && (
-          <div className="post-actions">
-            <button className="edit-btn" onClick={() => navigate(`/edit/${id}`)}>
-              Edit
-            </button>
-            <button className="delete-btn" onClick={handleDelete}>
-              Delete
-            </button>
+          {/* Post Content */}
+          <div className="post-content">
+            {post.content?.map((item, index) => (
+              <div key={index} className="content-block">
+                {item.type === "text" && item.para && (
+                  <p className="content-text">{item.para}</p>
+                )}
+                {item.type === "text" && item.content?.para && (
+                  <p className="content-text">{item.content.para}</p>
+                )}
+                {item.type === "image" && (item.url || item.content?.image_url) && (
+                  <figure className="content-image">
+                    <img 
+                      src={item.url || item.content.image_url} 
+                      alt="Post content"
+                      loading="lazy"
+                    />
+                  </figure>
+                )}
+                {item.type === "video" && (item.url || item.content?.video_url) && (
+                  <figure className="content-video">
+                    <video controls>
+                      <source src={item.url || item.content.video_url} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </figure>
+                )}
+              </div>
+            ))}
           </div>
-        )}
-      </div>
+
+          {/* Post Actions */}
+          <div className="post-actions-bar">
+            <div className="action-group">
+              <button 
+                className={`action-button ${hasLiked ? 'active' : ''}`}
+                onClick={handleLike}
+                disabled={actionLoading}
+              >
+                {hasLiked ? <FaHeart /> : <FaRegHeart />}
+                <span>{post.likes?.length || 0}</span>
+              </button>
+
+              <button 
+                className={`action-button ${hasDisliked ? 'active' : ''}`}
+                onClick={handleDislike}
+                disabled={actionLoading}
+              >
+                {hasDisliked ? <FaThumbsDown /> : <FaRegThumbsDown />}
+                <span>{post.dislikes?.length || 0}</span>
+              </button>
+
+              <button className="action-button">
+                <FaComment />
+                <span>{post.comments?.length || 0}</span>
+              </button>
+            </div>
+
+            <div className="action-group">
+              <button 
+                className={`action-button ${hasFavorited ? 'active' : ''}`}
+                onClick={handleFavorite}
+                disabled={actionLoading}
+                title={hasFavorited ? "Remove from favorites" : "Add to favorites"}
+              >
+                {hasFavorited ? <FaBookmark /> : <FaRegBookmark />}
+              </button>
+
+              <button 
+                className="action-button"
+                onClick={handleShare}
+                title="Share post"
+              >
+                <FaShare />
+              </button>
+            </div>
+          </div>
+
+          {/* Comments Section (Placeholder) */}
+          <div className="comments-section">
+            <h2 className="comments-title">
+              Comments ({post.comments?.length || 0})
+            </h2>
+            <div className="comments-placeholder">
+              <p>Comments section coming soon...</p>
+              <p className="comments-note">
+                Share your thoughts and engage with other readers
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
   );
 };
