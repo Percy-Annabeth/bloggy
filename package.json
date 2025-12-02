@@ -9,6 +9,10 @@
     "build": "cd frontend && npm run build",
     "start": "cd backend && node index.js"
   },
+  "dependencies": {
+  "dotenv": "^16.0.0"
+},
+
   "author": "",
   "license": "ISC",
   "description": "",
