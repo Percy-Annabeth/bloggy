@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: bloggy-fullstack
+    rootDir: .
+    env: node
+    buildCommand: |
+      cd backend && npm install
+      cd ../frontend && npm install
+      npm run build --prefix ../frontend
+    startCommand: |
+      cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NPM_CONFIG_PRODUCTION
+        value: false

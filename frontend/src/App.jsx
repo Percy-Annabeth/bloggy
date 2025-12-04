@@ -1,15 +1,15 @@
 // src/App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import HomePage from "./pages/Homepage.jsx";
-import LoginSignupPage from "./pages/LoginSignupPage";
-import DiscoverPage from "./pages/DiscoverPage";
-import ProfilePage from "./pages/ProfilePage";
-import SinglePostPage from "./pages/SinglePostPage";
-import CreatePostPage from "./pages/CreatePostPage";
-import ContactUsPage from "./pages/ContactUsPage";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage.jsx";
+import LoginSignupPage from "./pages/LoginSignupPage.jsx";
+import DiscoverPage from "./pages/DiscoverPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import SinglePostPage from "./pages/SinglePostPage.jsx";
+import CreatePostPage from "./pages/CreatePostPage.jsx";
+import ContactUsPage from "./pages/ContactUsPage.jsx";
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 import VisitorProfilePage from "./pages/VisitorProfilePage.jsx";
 
 const App = () => {
