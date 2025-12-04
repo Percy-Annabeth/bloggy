@@ -14,6 +14,8 @@ require("dotenv").config();
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 // Security Middleware
 app.use(helmet());
 app.use(cors({
@@ -111,7 +113,7 @@ app.use((req, res) => {
 app.use(errorHandler);
 
 // Server
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`🚀 Bloggy server running on port ${PORT}`);
   console.log(`📍 Environment: ${process.env.NODE_ENV || "development"}`);
