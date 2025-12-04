@@ -119,7 +119,7 @@ app.listen(PORT, () => {
   console.log(`📍 Environment: ${process.env.NODE_ENV || "development"}`);
 });
 
-// Graceful Shutdown
+// Graceful Shutdown ..
 process.on("SIGTERM", () => {
   console.log("SIGTERM signal received: closing HTTP server");
   server.close(() => {
