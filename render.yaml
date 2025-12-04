@@ -1,16 +1,21 @@
+# render.yaml (place at repository root)
 services:
   - type: web
-    name: bloggy
-    env: node
+    name: bloggy-fullstack
     rootDir: .
+    env: node
+    # Install backend & frontend, then build frontend.
+    # Use npm --prefix to avoid fragile cd commands.
     buildCommand: |
-      cd backend && npm install
-      cd ../frontend && npm install
-      npm run build --prefix frontend
+      npm --prefix backend install --no-audit --no-fund
+      npm --prefix frontend install --no-audit --no-fund
+      npm --prefix frontend run build
     startCommand: |
-      cd backend && npm start
+      # Serve by starting the backend (it serves the frontend dist)
+      npm --prefix backend start
     envVars:
       - key: NODE_ENV
         value: production
       - key: NPM_CONFIG_PRODUCTION
-        value: false
+        value: "false"
+      # Do NOT put secrets here. Add MONGODB_URI and JWT_SECRET etc in Render Dashboard Environment (secure).
